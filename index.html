@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Feud: Real Estate Edition</title>
+    <!-- Link to the main stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header with the game title -->
+    <header>
+        <h1>Family Feud: Real Estate Edition</h1>
+    </header>
+    
+    <!-- Scoreboard for both teams -->
+    <div class="scoreboard">
+        <div class="team team1">
+            <h2>Team 1</h2>
+            <div id="score1" class="score">0</div>
+        </div>
+        <div class="team team2">
+            <h2>Team 2</h2>
+            <div id="score2" class="score">0</div>
+        </div>
+    </div>
+
+    <!-- Main content area containing the question and game board -->
+    <main>
+        <!-- Container for displaying the current question -->
+        <div id="question-container">
+            <h3 id="question"></h3>
+        </div>
+        
+        <!-- Board where answer cards will appear -->
+        <div id="board" class="board">
+            <!-- Answer slots are generated dynamically via JavaScript -->
+        </div>
+        
+        <!-- Controls for moving to the next round and selecting the active team -->
+        <div class="controls">
+            <button id="nextRoundBtn" aria-label="Next Round">Next Round</button>
+            <!-- Hidden button that appears after the third round to start Final Feud -->
+            <button id="startFinalBtn" aria-label="Start Final Feud" style="display:none;">Start Final Feud</button>
+            <select id="activeTeam" aria-label="Active Team">
+                <option value="1">Active Team: Team 1</option>
+                <option value="2">Active Team: Team 2</option>
+            </select>
+        </div>
+    </main>
+
+    <!-- Final Feud section. This will be revealed after the regular rounds are complete -->
+    <div id="final-feud-container" class="hidden">
+        <!-- Introduction showing which team plays in the final round -->
+        <div id="final-intro" class="final-intro"></div>
+
+        <!-- Inputs for player 1 -->
+        <div id="player1-inputs" class="final-player-inputs">
+            <h3>Player 1: Enter your answers</h3>
+            <div id="questions-list-1"></div>
+            <button id="submitPlayer1" aria-label="Submit Player 1 Answers">Submit Answers</button>
+        </div>
+
+        <!-- Inputs for player 2 -->
+        <div id="player2-inputs" class="final-player-inputs" style="display:none;">
+            <h3>Player 2: Enter your answers</h3>
+            <div id="questions-list-2"></div>
+            <button id="submitPlayer2" aria-label="Submit Player 2 Answers">Submit Answers</button>
+        </div>
+
+        <!-- Results section: reveals after both players have answered -->
+        <div id="final-results" style="display:none;">
+            <h3>Final Feud Results</h3>
+            <div id="final-board" class="final-board"></div>
+            <div class="final-total">Total Points: <span id="final-total-score">0</span></div>
+            <div id="final-message" class="final-message"></div>
+        </div>
+    </div>
+
+    <!-- Include the game logic -->
+    <script src="script.js"></script>
+</body>
+</html>
