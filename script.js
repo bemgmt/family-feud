@@ -10,129 +10,92 @@
 
 // Define the rounds for the game. Each round has a question and up to six answers.
 const rounds = [
-    {
-        question: 'What is the first thing you do when looking for a new home?',
-        answers: [
-            { text: 'Browse online listings', points: 30 },
-            { text: 'Hire a real estate agent', points: 25 },
-            { text: 'Drive around neighborhoods', points: 20 },
-            { text: 'Check home prices', points: 15 },
-            { text: 'Get pre-approved for mortgage', points: 10 },
-            { text: 'Ask friends & family', points: 5 }
-        ]
-    },
-    {
-        question: 'Name something you might fix before selling your house.',
-        answers: [
-            { text: 'Paint the walls', points: 30 },
-            { text: 'Fix leaks', points: 25 },
-            { text: 'Replace flooring', points: 20 },
-            { text: 'Update the kitchen', points: 15 },
-            { text: 'Improve curb appeal', points: 10 },
-            { text: 'Clean the yard', points: 5 }
-        ]
-    },
-    {
-        question: "What's an essential feature for a modern kitchen?",
-        answers: [
-            { text: 'Energy‑efficient appliances', points: 30 },
-            { text: 'Granite or stone countertops', points: 25 },
-            { text: 'Island with seating', points: 20 },
-            { text: 'Open layout', points: 15 },
-            { text: 'Large pantry', points: 10 },
-            { text: 'Dishwasher', points: 5 }
-        ]
-    },
-    {
-        question: 'What do buyers want most in a neighborhood?',
-        answers: [
-            { text: 'Good schools', points: 30 },
-            { text: 'Safety', points: 25 },
-            { text: 'Quiet streets', points: 20 },
-            { text: 'Parks & green space', points: 15 },
-            { text: 'Nearby shopping', points: 10 },
-            { text: 'Low traffic', points: 5 }
-        ]
-    },
-    {
-        question: 'What is a top priority when choosing a real estate agent?',
-        answers: [
-            { text: 'Experience', points: 30 },
-            { text: 'Knowledge of the area', points: 25 },
-            { text: 'Good communication', points: 20 },
-            { text: 'Negotiation skills', points: 15 },
-            { text: 'Honesty & trust', points: 10 },
-            { text: 'Low commission', points: 5 }
-        ]
-    }
+  {
+    question: "What’s the most important factor when choosing a real estate agent to help you buy a home in the San Gabriel Valley?",
+    answers: [
+      { text: "Knowledge of local neighborhoods", points: 32 },
+      { text: "Responsiveness / communication", points: 24 },
+      { text: "Trustworthiness / reputation", points: 18 },
+      { text: "Negotiation skills", points: 12 },
+      { text: "Experience with first-time buyers", points: 9 },
+      { text: "Referral from friend or family", points: 5 }
+    ]
+  },
+  {
+    question: "What do you look for before committing to buy or lease a commercial property?",
+    answers: [
+      { text: "Traffic count / visibility", points: 28 },
+      { text: "Zoning & permitted uses", points: 22 },
+      { text: "Proximity to major roads/freeways", points: 18 },
+      { text: "Projected ROI / cash flow", points: 14 },
+      { text: "Parking availability", points: 10 },
+      { text: "Anchor tenants or surrounding businesses", points: 8 }
+    ]
+  },
+  {
+    question: "When preparing a property to list, what’s the first professional service you’d hire?",
+    answers: [
+      { text: "Handyman or contractor", points: 26 },
+      { text: "Photographer / videographer", points: 22 },
+      { text: "Stager", points: 20 },
+      { text: "Cleaning service", points: 15 },
+      { text: "Landscaper", points: 10 },
+      { text: "Window washer", points: 7 }
+    ]
+  }
 ];
 
-// Keep track of the current round, the round number, and the scores for each team
-let currentRoundIndex = 0;
-// There are three main rounds; roundNumber starts at 1 and increments after each round
-let roundNumber = 1;
-// Multipliers for each round (1x, 2x, 3x)
-const multipliers = [1, 2, 3];
-// Track team scores
-const scores = {
-    1: 0,
-    2: 0
-};
-
-// Final Feud data: questions and their survey answers. These questions should
-// remain relevant to real estate and affiliate marketing. If actual polling
-// numbers are unavailable, educated guesses are provided for scoring.
-const finalQuestions = [
-    {
-        question: 'Name a room that sells a house',
-        answers: [
-            { text: 'Kitchen', points: 40 },
-            { text: 'Living room', points: 25 },
-            { text: 'Master bedroom', points: 20 },
-            { text: 'Bathroom', points: 10 },
-            { text: 'Dining room', points: 5 }
-        ]
-    },
-    {
-        question: 'Name something buyers check when touring a home',
-        answers: [
-            { text: 'Water pressure', points: 30 },
-            { text: 'Closet space', points: 25 },
-            { text: 'Natural light', points: 20 },
-            { text: 'Flooring', points: 15 },
-            { text: 'Smells', points: 10 }
-        ]
-    },
-    {
-        question: 'Name an online platform where you can advertise your property',
-        answers: [
-            { text: 'Zillow', points: 35 },
-            { text: 'Realtor.com', points: 25 },
-            { text: 'Redfin', points: 20 },
-            { text: 'Facebook Marketplace', points: 15 },
-            { text: 'Craigslist', points: 5 }
-        ]
-    },
-    {
-        question: 'Name a feature that adds value to a rental property',
-        answers: [
-            { text: 'Updated kitchen', points: 30 },
-            { text: 'Parking', points: 25 },
-            { text: 'In‑unit laundry', points: 20 },
-            { text: 'Air conditioning', points: 15 },
-            { text: 'Outdoor space', points: 10 }
-        ]
-    },
-    {
-        question: 'Name a professional service a realtor might recommend',
-        answers: [
-            { text: 'Home inspector', points: 35 },
-            { text: 'Mortgage lender', points: 25 },
-            { text: 'Staging company', points: 20 },
-            { text: 'Contractor', points: 15 },
-            { text: 'Photographer', points: 5 }
-        ]
-    }
+const finalFeudQuestions = [
+  {
+    question: "Name a home service that adds curb appeal before a listing goes live.",
+    answers: [
+      { text: "Landscaping", points: 35 },
+      { text: "Paint touch-up", points: 25 },
+      { text: "Driveway cleaning", points: 18 },
+      { text: "Outdoor lighting", points: 12 },
+      { text: "Mailbox replacement", points: 10 }
+    ]
+  },
+  {
+    question: "Name something a seller might want a home inspector to check before listing.",
+    answers: [
+      { text: "Roof", points: 30 },
+      { text: "HVAC system", points: 25 },
+      { text: "Electrical", points: 18 },
+      { text: "Plumbing", points: 15 },
+      { text: "Foundation", points: 12 }
+    ]
+  },
+  {
+    question: "Name a vendor a Realtor might call when planning an open house.",
+    answers: [
+      { text: "Cleaning service", points: 30 },
+      { text: "Insurance Agent", points: 22 },
+      { text: "Lender", points: 20 },
+      { text: "Marketing team", points: 15 },
+      { text: "Title Rep", points: 13 }
+    ]
+  },
+  {
+    question: "Name a service a homeowner might request after moving in.",
+    answers: [
+      { text: "Security system installer", points: 28 },
+      { text: "Internet setup", points: 24 },
+      { text: "Pest control", points: 20 },
+      { text: "Home Warranty", points: 15 },
+      { text: "Interior designer", points: 13 }
+    ]
+  },
+  {
+    question: "Name a small upgrade that helps a home sell faster.",
+    answers: [
+      { text: "Light fixtures", points: 30 },
+      { text: "Cabinet handles", points: 22 },
+      { text: "Smart thermostat", points: 18 },
+      { text: "New faucets", points: 16 },
+      { text: "Blinds", points: 14 }
+    ]
+  }
 ];
 
 // Variables and DOM references for the Final Feud round
